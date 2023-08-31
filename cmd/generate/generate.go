@@ -32,6 +32,11 @@ func Generate() {
 		fmt.Println(err.Error())
 		panic(err)
 	}
+	err = basehelper.RenameDefaultNames(projectName)
+	if err != nil {
+		fmt.Println(err.Error())
+		panic(err)
+	}
 	err = behelper.InitBeProject(projectName, feFramework)
 	if err != nil {
 		panic(err)
