@@ -37,7 +37,7 @@ func Generate() {
 		fmt.Println(err.Error())
 		panic(err)
 	}
-	err = behelper.InitBeProject(projectName, feFramework)
+	err = behelper.InitBeProject(projectName, beFramework)
 	if err != nil {
 		panic(err)
 	}

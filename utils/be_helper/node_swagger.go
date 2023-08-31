@@ -1,6 +1,7 @@
 package behelper
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"os/exec"
@@ -10,15 +11,11 @@ import (
 )
 
 func initNodejsSwaggerProject(projectName string) error {
-	fmt.Println("BEFORE 1")
-
 	cmd := exec.Command("cp", "-a", "template/backend/swagger/with-nodejs/.", projectName+"/apps")
 	err := cmd.Run()
 	if err != nil {
 		return err
 	}
-	fmt.Println("BEFORE 2")
-
 	err = initNodejsSwaggerLib(projectName)
 	if err != nil {
 		return err
@@ -48,7 +45,7 @@ func initNodejsSwaggerProject(projectName string) error {
 }
 
 func initNodejsSwaggerLib(projectName string) error {
-	cmd := exec.Command("cp", "-a", "template/libs/swagger/with-nodejs/.", projectName+"/apps")
+	cmd := exec.Command("cp", "-a", "template/libs/swagger/with-nodejs/.", projectName+"/libs")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
@@ -56,5 +53,49 @@ func initNodejsSwaggerLib(projectName string) error {
 	if err != nil {
 		return err
 	}
+	modifyJson(projectName)
 	return nil
+}
+
+func modifyJson(projectName string) {
+	// Open the JSON file for reading and writing
+	filePath := projectName + "/tsconfig.base.json"
+	file, err := os.OpenFile(filePath, os.O_RDWR, 0644)
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
+	defer file.Close()
+
+	// Decode the existing JSON data
+	var data map[string]interface{}
+	if err := json.NewDecoder(file).Decode(&data); err != nil {
+		fmt.Println("Error decoding JSON:", err)
+		return
+	}
+
+	// Update the paths map under compilerOptions
+	compilerOptions, ok := data["compilerOptions"].(map[string]interface{})
+	if ok {
+		paths, ok := compilerOptions["paths"].(map[string]interface{})
+		if !ok {
+			paths = make(map[string]interface{})
+			compilerOptions["paths"] = paths
+		}
+		paths[projectName+"/shared/sdk"] = []interface{}{"libs/shared/sdk/src/index.ts"}
+	}
+
+	// Rewind the file pointer to the beginning
+	file.Seek(0, 0)
+	encodedData, err := json.MarshalIndent(data, "", "    ")
+	if err != nil {
+		fmt.Println("Error encoding JSON:", err)
+		return
+	}
+	if _, err := file.Write(encodedData); err != nil {
+		fmt.Println("Error writing JSON to file:", err)
+		return
+	}
+
+	fmt.Println("Key-value pair added successfully.")
 }
