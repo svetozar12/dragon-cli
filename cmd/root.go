@@ -16,7 +16,19 @@ var rootCmd = &cobra.Command{
 	},
 }
 
+var verbose bool
+var version = "v0.0.0"
+
 func Execute() {
+	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Enable verbose output")
+	rootCmd.PersistentFlags().BoolP("version", "V", false, "Print the version")
+	rootCmd.PersistentPreRun = func(cmd *cobra.Command, args []string) {
+		if cmd.Flags().Changed("version") {
+			fmt.Printf("Your CLI Tool Version %s\n", version)
+			os.Exit(0)
+		}
+	}
+
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
