@@ -11,23 +11,43 @@ import (
 )
 
 func initNodejsSwaggerProject(projectName string) error {
-	cmd := exec.Command("cp", "-a", "template/backend/swagger/with-nodejs/.", projectName+"/apps")
-	err := cmd.Run()
-	if err != nil {
+	// Copy template files to the project directory.
+	if err := copyTemplateFiles(projectName, "template/backend/swagger/with-nodejs"); err != nil {
 		return err
 	}
-	err = initNodejsSwaggerLib(projectName)
-	if err != nil {
+
+	// Initialize the Node.js Swagger library.
+	if err := initNodejsSwaggerLib(projectName); err != nil {
 		return err
 	}
+
+	// Define and set project dependencies.
+	if err := setNodejsSwaggerProjectDependencies(); err != nil {
+		return err
+	}
+
+	// Define and set development dependencies.
+	if err := setNodejsSwaggerDevelopmentDependencies(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func setNodejsSwaggerProjectDependencies() error {
 	packageNames := []string{
 		"axios",
 		"express",
 		"swagger-jsdoc",
 		"swagger-ui-express",
 		"tslib",
-		"@openapitools/openapi-generator-cli"}
+		"@openapitools/openapi-generator-cli",
+	}
 	utils.SetDeps(packageNames)
+	return nil
+}
+
+func setNodejsSwaggerDevelopmentDependencies() error {
 	devPackageNames := []string{
 		"@nx/express",
 		"@nx/jest",
@@ -45,6 +65,28 @@ func initNodejsSwaggerProject(projectName string) error {
 	}
 	devPackageNames = append(devPackageNames, constants.CommonDevFe...)
 	utils.SetDevDeps(devPackageNames)
+	return nil
+}
+
+func copyTemplateFiles(projectName, relativeSourcePath string) error {
+	// Get the current working directory.
+	currentDir, err := os.Getwd()
+	if err != nil {
+		return fmt.Errorf("error getting current working directory: %v", err)
+	}
+
+	// Construct the full source and destination paths.
+	fullSourcePath := currentDir + "/" + relativeSourcePath
+	fullDestinationPath := projectName + "/apps"
+
+	// Create the `cp` command with the full source and destination paths.
+	cmd := exec.Command("cp", "-a", fullSourcePath+"/.", fullDestinationPath)
+
+	// Run the `cp` command.
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("error copying template files: %v", err)
+	}
+
 	return nil
 }
 

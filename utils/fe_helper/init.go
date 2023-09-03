@@ -1,14 +1,19 @@
 package fehelper
 
+import (
+	"github.com/svetozar12/dragon-cli/utils/fe_helper/nextjs"
+	"github.com/svetozar12/dragon-cli/utils/fe_helper/react"
+)
+
 func InitFeProject(projectName string, framework string) error {
 	switch framework {
 	case "React(with vite)":
-		err := initReactProject(projectName)
+		err := react.InitReactProject(projectName)
 		if err != nil {
 			return err
 		}
 	case "Nextjs":
-		err := initNextJSProject(projectName)
+		err := nextjs.InitNextJSProject(projectName)
 		if err != nil {
 			return err
 		}
