@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+
+	"github.com/svetozar12/dragon-cli/installers"
 )
 
 var deps []string
@@ -37,38 +39,38 @@ func removeDuplicates(input []string) []string {
 	return result
 }
 
-func AddDependencyAndInstall(packageNames []string, isDev bool, projectName string) error {
-	if len(packageNames) < 1 {
-		return nil
-	}
-	packageManager := "yarn"
-
-	args := []string{"add"}
-	if isDev {
-		args = append(args, "-D")
-
-	}
-	args = append(args, packageNames...)
-
-	// Add the dependencies to package.json
-	addCmd := exec.Command(packageManager, args...)
-	addCmd.Dir = projectName
-	addCmd.Stdout = os.Stdout
-	addCmd.Stderr = os.Stderr
-
-	if err := addCmd.Run(); err != nil {
-		return fmt.Errorf("error adding dependencies: %v", err)
-	}
-
-	// Install the dependencies
-	installCmd := exec.Command(packageManager, "install")
-	installCmd.Dir = projectName
-	installCmd.Stdout = os.Stdout
-	installCmd.Stderr = os.Stderr
-
-	if err := installCmd.Run(); err != nil {
+func InstallDependencies(projectName string, packageManager string) error {
+	cmd := exec.Command(packageManager, "install")
+	cmd.Dir = projectName
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
 		return fmt.Errorf("error installing dependencies: %v", err)
 	}
 
 	return nil
+}
+
+func AddDependency(packageList []string, isDev bool, projectName string) {
+	filePath := projectName + "/package.json"
+
+	data, file, err := DecodeJson(filePath)
+	if err != nil {
+		panic("Function DecodeJson() failed" + err.Error())
+	}
+	defer file.Close()
+
+	dependecies := data["dependencies"].(map[string]interface{})
+	devDependecies := data["devDependencies"].(map[string]interface{})
+	for _, value := range packageList {
+		packageVersion := installers.DependencyVersionMap[value]
+		if isDev {
+			devDependecies[value] = packageVersion
+		} else {
+			dependecies[value] = packageVersion
+
+		}
+
+	}
+	SaveJsonFile(file, data)
 }

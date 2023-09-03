@@ -91,7 +91,7 @@ func modifyJson(projectName string) {
 
 	// Rewind the file pointer to the beginning
 	file.Seek(0, 0)
-	encodedData, err := json.MarshalIndent(data, "", "    ")
+	encodedData, err := json.MarshalIndent(data, "", "  ")
 	if err != nil {
 		fmt.Println("Error encoding JSON:", err)
 		return

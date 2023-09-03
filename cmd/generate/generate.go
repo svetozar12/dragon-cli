@@ -20,6 +20,7 @@ func Generate() {
 		constants.FeFrameworkLabel,
 		constants.FeFrameworkList,
 	)
+	installDeps := utils.GetBooleanInput("Do you want to install dependencies ?")
 	err := basehelper.CreateProjectDir(projectName)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -39,12 +40,13 @@ func Generate() {
 		panic(err)
 	}
 	deps, devDeps := utils.GetDeps()
-	err = utils.AddDependencyAndInstall(deps, false, projectName)
-	if err != nil {
-		panic(err)
+	utils.AddDependency(deps, false, projectName)
+	utils.AddDependency(devDeps, true, projectName)
+	if installDeps {
+		err := utils.InstallDependencies(projectName, "yarn")
+		if err != nil {
+			panic("Function InstallDependencies() failed" + err.Error())
+		}
 	}
-	err = utils.AddDependencyAndInstall(devDeps, false, projectName)
-	if err != nil {
-		panic(err)
-	}
+
 }

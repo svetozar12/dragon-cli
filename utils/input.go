@@ -19,3 +19,10 @@ func GetInput(label string) string {
 	survey.AskOne(prompt, &res)
 	return res
 }
+
+func GetBooleanInput(label string) bool {
+	res := false
+	prompt := &survey.Confirm{Message: label}
+	survey.AskOne(prompt, &res)
+	return res
+}
