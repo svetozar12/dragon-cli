@@ -60,6 +60,8 @@ var DependencyVersionMap = map[string]string{
 	"jest-environment-node": "^29.6.4",
 	"jsdom":                 "^22.1.0",
 	"cypress":               "^13.1.0",
+	// astro
+	"astro": "^3.0.7",
 }
 
 type AvailableDependencies string

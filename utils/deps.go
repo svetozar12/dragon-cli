@@ -52,6 +52,9 @@ func InstallDependencies(projectName string, packageManager string) error {
 }
 
 func AddDependency(packageList []string, isDev bool, projectName string) {
+	if len(packageList) < 1 {
+		return
+	}
 	filePath := projectName + "/package.json"
 
 	data, file, err := DecodeJson(filePath)

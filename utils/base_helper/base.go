@@ -3,8 +3,6 @@ package basehelper
 import (
 	"fmt"
 	"os/exec"
-
-	"github.com/svetozar12/dragon-cli/utils"
 )
 
 func CreateProjectDir(projectName string) error {
@@ -32,10 +30,6 @@ func RenameDefaultNames(projectName string) error {
 	if err != nil {
 		return err
 	}
-	devDeps := []string{
-		"nx",
-		"@nx/workspace",
-	}
-	utils.SetDevDeps(devDeps)
+
 	return nil
 }
