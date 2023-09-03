@@ -11,7 +11,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "npx openapi-generator-cli generate -i http://localhost:3333/api-docs/ -o libs/shared/sdk/src/api/v1 -g typescript-axios --additional-properties=supportsES6=true,typescriptThreePlus=true --skip-validate-spec"
+          "npx openapi-generator-cli generate -i http://127.0.0.1:3333/swagger.json -o libs/shared/sdk/src/api/v1 -g typescript-axios --additional-properties=supportsES6=true,typescriptThreePlus=true --skip-validate-spec"
         ],
         "parallel": false
       },

@@ -25,7 +25,8 @@ func initNodejsSwaggerProject(projectName string) error {
 		"express",
 		"swagger-jsdoc",
 		"swagger-ui-express",
-		"tslib"}
+		"tslib",
+		"@openapitools/openapi-generator-cli"}
 	utils.SetDeps(packageNames)
 	devPackageNames := []string{
 		"@nx/express",
@@ -38,7 +39,10 @@ func initNodejsSwaggerProject(projectName string) error {
 		"jest",
 		"jest-environment-node",
 		"ts-jest",
-		"ts-node"}
+		"ts-node",
+		"@types/swagger-ui-express",
+		"@types/swagger-jsdoc",
+	}
 	devPackageNames = append(devPackageNames, constants.CommonDevFe...)
 	utils.SetDevDeps(devPackageNames)
 	return nil
