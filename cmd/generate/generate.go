@@ -13,16 +13,9 @@ import (
 func Generate() {
 	projectName := utils.GetInput("Project Name")
 	beFramework := utils.GetCheckbox(
-		"What language would your backend use ?",
-		[]string{
-			"golang(swagger)",
-			"golang(graphql)",
-			"typescript(swagger)",
-			"typescript(graphql)",
-		},
+		constants.BeFrameworkLabel,
+		constants.BeFrameworkList,
 	)
-	fmt.Println("Oh, I see! You like", beFramework)
-
 	feFramework := utils.GetCheckbox(
 		constants.FeFrameworkLabel,
 		constants.FeFrameworkList,

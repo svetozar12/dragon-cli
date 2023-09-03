@@ -6,4 +6,5 @@ var FeFrameworkList = []string{
 	"React(with vite)",
 	"Nextjs",
 	"Astro",
+	"I don't need frontend",
 }

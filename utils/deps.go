@@ -38,6 +38,9 @@ func removeDuplicates(input []string) []string {
 }
 
 func AddDependencyAndInstall(packageNames []string, isDev bool, projectName string) error {
+	if len(packageNames) < 1 {
+		return nil
+	}
 	packageManager := "yarn"
 
 	args := []string{"add"}

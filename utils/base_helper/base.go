@@ -2,6 +2,8 @@ package basehelper
 
 import (
 	"os/exec"
+
+	"github.com/svetozar12/dragon-cli/utils"
 )
 
 func CreateProjectDir(projectName string) error {
@@ -16,7 +18,6 @@ func CreateProjectDir(projectName string) error {
 }
 
 func RenameDefaultNames(projectName string) error {
-	// cmd := exec.Command("find", ".", "-type", "f", "-exec", "sed", "-e", "s/@dragon-cli/template/"+projectName+"/g", "-i.bak", "'{}'", projectName)
 	cmd := exec.Command("find", ".", "-type", "f", "-exec", "sed", "-e", "s/@dragon-cli-template/"+projectName+"/g", "-i", "{}", "+")
 	cmd.Dir = projectName
 	// Run the command
@@ -24,5 +25,10 @@ func RenameDefaultNames(projectName string) error {
 	if err != nil {
 		return err
 	}
+	devDeps := []string{
+		"nx",
+		"@nx/workspace",
+	}
+	utils.SetDevDeps(devDeps)
 	return nil
 }
