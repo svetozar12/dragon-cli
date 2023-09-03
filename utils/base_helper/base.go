@@ -20,6 +20,7 @@ func CreateProjectDir(projectName string) error {
 
 	// Construct the full source and destination paths.
 	fullSourcePath := currentDir + "/" + relativeSourcePath
+	fmt.Println(fullSourcePath)
 	fullDestinationPath := projectName
 
 	// Create the `cp` command with the full source and destination paths.
