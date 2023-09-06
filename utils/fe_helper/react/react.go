@@ -11,7 +11,9 @@ import (
 
 func InitReactProject(projectName string) error {
 	// Copy template files to the project directory.
-	if err := copyTemplateFiles(projectName, "template/frontend/with-react"); err != nil {
+	copyFolderContent := true
+	err := utils.CopyTemplateFromRepo("template/frontend/with-react", projectName+"/apps", copyFolderContent)
+	if err != nil {
 		return err
 	}
 
