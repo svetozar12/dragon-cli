@@ -17,7 +17,7 @@ var rootCmd = &cobra.Command{
 }
 
 var verbose bool
-var version = "v0.0.0"
+var version = "v1.0.2"
 
 func Execute() {
 	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Enable verbose output")

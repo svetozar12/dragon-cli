@@ -16,7 +16,7 @@ func Generate() {
 	usr, err := user.Current()
 	if err != nil {
 		fmt.Println("Error getting user's home directory:", err)
-		panic(err)
+		panic("Function RenameDefaultNames() failed" + err.Error())
 	}
 
 	tmpRepoDir := filepath.Join(usr.HomeDir, "dragon-cli-tmp")
@@ -42,21 +42,19 @@ func Generate() {
 	installDeps := utils.GetBooleanInput("Do you want to install dependencies ?")
 	err = basehelper.CreateProjectDir(projectName)
 	if err != nil {
-		fmt.Println(err.Error())
-		panic(err)
-	}
-	err = basehelper.RenameDefaultNames(projectName)
-	if err != nil {
-		fmt.Println(err.Error())
-		panic(err)
+		panic("Function CreateProjectDir() failed" + err.Error())
 	}
 	err = behelper.InitBeProject(projectName, beFramework)
 	if err != nil {
-		panic(err)
+		panic("Function InitBeProject() failed" + err.Error())
 	}
 	err = fehelper.InitFeProject(projectName, feFramework)
 	if err != nil {
-		panic(err)
+		panic("Function InitFeProject() failed" + err.Error())
+	}
+	err = basehelper.RenameDefaultNames(projectName)
+	if err != nil {
+		panic("Function RenameDefaultNames() failed" + err.Error())
 	}
 	deps, devDeps := utils.GetDeps()
 	utils.AddDependency(deps, false, projectName)
