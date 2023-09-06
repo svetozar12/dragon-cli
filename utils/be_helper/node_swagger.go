@@ -11,9 +11,10 @@ import (
 )
 
 func initNodejsSwaggerProject(projectName string) error {
-	// Copy template files to the project directory.
-	if err := copyTemplateFiles(projectName, "template/backend/swagger/with-nodejs"); err != nil {
-		return err
+	copyFolderContent := true
+	err := utils.CopyTemplateFromRepo("template/backend/swagger/with-nodejs", projectName+"/apps", copyFolderContent)
+	if err != nil {
+		return fmt.Errorf("error creating project directory: %v", err)
 	}
 
 	// Initialize the Node.js Swagger library.
@@ -91,11 +92,8 @@ func copyTemplateFiles(projectName, relativeSourcePath string) error {
 }
 
 func initNodejsSwaggerLib(projectName string) error {
-	cmd := exec.Command("cp", "-a", "template/libs/swagger/with-nodejs/.", projectName+"/libs")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	err := cmd.Run()
-	fmt.Printf("Executing command: %s\n", cmd.String()) // Print the command
+	copyFolderContent := true
+	err := utils.CopyTemplateFromRepo("template/libs/swagger/with-nodejs", projectName+"/libs", copyFolderContent)
 	if err != nil {
 		return err
 	}
@@ -142,6 +140,4 @@ func modifyJson(projectName string) {
 		fmt.Println("Error writing JSON to file:", err)
 		return
 	}
-
-	fmt.Println("Key-value pair added successfully.")
 }

@@ -3,19 +3,14 @@ package basehelper
 import (
 	"fmt"
 	"os/exec"
+
+	"github.com/svetozar12/dragon-cli/utils"
 )
 
 func CreateProjectDir(projectName string) error {
-	// Specify the relative path to the source base template directory.
-	relativeSourcePath := "template/base"
-
-	fullDestinationPath := projectName
-
-	// Create the `cp` command with the full source and destination paths.
-	cmd := exec.Command("cp", "-r", relativeSourcePath, fullDestinationPath)
-
-	// Run the `cp` command.
-	if err := cmd.Run(); err != nil {
+	copyFolderContent := false
+	err := utils.CopyTemplateFromRepo("template/base", projectName, copyFolderContent)
+	if err != nil {
 		return fmt.Errorf("error creating project directory: %v", err)
 	}
 

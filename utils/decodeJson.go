@@ -31,6 +31,4 @@ func SaveJsonFile(file *os.File, data map[string]interface{}) {
 	if _, err := file.Write(encodedData); err != nil {
 		panic("Function Write() failed" + err.Error())
 	}
-
-	fmt.Println("Key-value pair added successfully.")
 }
