@@ -1,9 +1,12 @@
 name: CLI Test
 
 on:
-  push:
+  push: # Trigger on any push event
     branches:
       - "*"
+  pull_request:
+    branches:
+      - master
 
 jobs:
   test-cli:
