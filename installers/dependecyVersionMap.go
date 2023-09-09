@@ -2,7 +2,7 @@ package installers
 
 var DependencyVersionMap = map[string]string{
 	// Nx
-	"nx":                "16.7.4",
+	NX:                  "16.7.4",
 	"@nx/workspace":     "16.7.4",
 	"@nx/cypress":       "^16.7.4",
 	"@nx/esbuild":       "^16.7.4",
@@ -64,26 +64,13 @@ var DependencyVersionMap = map[string]string{
 	// astro
 	"astro": "^3.0.7",
 	// mongoose
-	"mongoose":        "^7.5.0",
-	"@types/mongoose": "^5.11.97",
+	"mongoose":     "^7.5.0",
+	TYPES_MONGOOSE: "^5.11.97",
 }
 
 type AvailableDependencies string
 
 const (
-	NextAuth                  = "next-auth"
-	NextAuthPrisma            = "@next-auth/prisma-adapter"
-	Prisma                    = "prisma"
-	PrismaClient              = "@prisma/client"
-	TailwindCSS               = "tailwindcss"
-	Autoprefixer              = "autoprefixer"
-	PostCSS                   = "postcss"
-	Prettier                  = "prettier"
-	PrettierPluginTailwindCSS = "prettier-plugin-tailwindcss"
-	TRPCClient                = "@trpc/client"
-	TRPCServer                = "@trpc/server"
-	TRPCReactQuery            = "@trpc/react-query"
-	TRPCNext                  = "@trpc/next"
-	TanstackReactQuery        = "@tanstack/react-query"
-	SuperJSON                 = "superjson"
+	NX             = "nx"
+	TYPES_MONGOOSE = "@types/mongoose"
 )
