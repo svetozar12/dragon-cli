@@ -1,0 +1,33 @@
+# this workflow will run on merge with master
+
+name: CI/CD Pipeline
+
+on:
+  push: # Trigger on any push event
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: "1.20"
+
+      - name: Download Go module dependencies
+        run: go mod download
+
+      - name: Build CLI tool
+        run: go build -o myclitool
+
+      - name: Run tests
+        run: go test ./...

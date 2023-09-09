@@ -1,6 +1,8 @@
 package utils
 
-import "github.com/AlecAivazis/survey/v2"
+import (
+	"github.com/AlecAivazis/survey/v2"
+)
 
 func GetCheckbox(label string, opts []string) string {
 	res := ""
@@ -20,9 +22,12 @@ func GetInput(label string) string {
 	return res
 }
 
-func GetBooleanInput(label string) bool {
+func GetBooleanInput(label string) string {
 	res := false
 	prompt := &survey.Confirm{Message: label}
 	survey.AskOne(prompt, &res)
-	return res
+	if res {
+		return "true"
+	}
+	return "false"
 }
