@@ -43,6 +43,8 @@ func setNodejsSwaggerProjectDependencies() error {
 		"swagger-ui-express",
 		"tslib",
 		"@openapitools/openapi-generator-cli",
+		"mongoose",
+		"zod",
 	}
 	utils.SetDeps(packageNames)
 	return nil
@@ -63,6 +65,7 @@ func setNodejsSwaggerDevelopmentDependencies() error {
 		"ts-node",
 		"@types/swagger-ui-express",
 		"@types/swagger-jsdoc",
+		"@types/mongoose",
 	}
 	devPackageNames = append(devPackageNames, constants.CommonDevFe...)
 	utils.SetDevDeps(devPackageNames)
