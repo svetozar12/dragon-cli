@@ -2,9 +2,13 @@ import { defaultApi } from "@dragon-cli-template/shared/sdk";
 
 describe("GET /api/example", () => {
   it("should return a message", async () => {
-    const res = await defaultApi.instance().exampleGet();
+    const res = await defaultApi.instance().apiExampleGet();
 
-    expect(res.status).toBe(200);
-    expect(res.data).toEqual({ message: "Hello API" });
+    const {
+      status,
+      data: { message },
+    } = res;
+    expect(status).toBe(200);
+    expect(message).toEqual("Hi");
   });
 });

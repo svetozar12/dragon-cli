@@ -1,7 +1,7 @@
 import { HelloWorld, connectToMongo } from './database/mongo';
 import express from 'express';
 import { serve, setup } from 'swagger-ui-express';
-import { exampleRouter } from './routes/example/example';
+import { exampleRouter } from './routes/example';
 import { specs } from './utils/swagger';
 import { getEnvVariables } from './utils/env';
 
