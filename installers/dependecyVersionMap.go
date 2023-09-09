@@ -33,6 +33,7 @@ var DependencyVersionMap = map[string]string{
 	"@typescript-eslint/parser":        "^6.5.0",
 	"ts-jest":                          "^29.1.1",
 	"ts-node":                          "^10.9.1",
+	"zod":                              "^3.22.2",
 	// Swc
 	"@swc/cli":     "^0.1.62",
 	"@swc/core":    "^1.3.82",
@@ -62,6 +63,9 @@ var DependencyVersionMap = map[string]string{
 	"cypress":               "^13.1.0",
 	// astro
 	"astro": "^3.0.7",
+	// mongoose
+	"mongoose":        "^7.5.0",
+	"@types/mongoose": "^5.11.97",
 }
 
 type AvailableDependencies string

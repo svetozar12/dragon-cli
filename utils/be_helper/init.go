@@ -2,7 +2,7 @@ package behelper
 
 func InitBeProject(projectName string, framework string) error {
 	switch framework {
-	case "typescript(swagger)":
+	case "nodejs":
 		err := initNodejsSwaggerProject(projectName)
 		if err != nil {
 			return err

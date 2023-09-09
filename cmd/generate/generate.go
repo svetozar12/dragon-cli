@@ -5,6 +5,7 @@ import (
 	"os/user"
 	"path/filepath"
 
+	"github.com/spf13/cobra"
 	"github.com/svetozar12/dragon-cli/constants"
 	"github.com/svetozar12/dragon-cli/utils"
 	basehelper "github.com/svetozar12/dragon-cli/utils/base_helper"
@@ -12,7 +13,8 @@ import (
 	fehelper "github.com/svetozar12/dragon-cli/utils/fe_helper"
 )
 
-func Generate() {
+func Generate(cmd *cobra.Command, args []string) {
+	branch, _ := cmd.Flags().GetString("branch")
 	usr, err := user.Current()
 	if err != nil {
 		fmt.Println("Error getting user's home directory:", err)
@@ -22,7 +24,7 @@ func Generate() {
 	tmpRepoDir := filepath.Join(usr.HomeDir, "dragon-cli-tmp")
 
 	go func() {
-		err := utils.CloneTemplateRepo(tmpRepoDir)
+		err := utils.CloneTemplateRepo(tmpRepoDir, branch)
 		if err != nil {
 			panic("Template Repository isn't available at the moment or the is some problem with the cli tool")
 		}

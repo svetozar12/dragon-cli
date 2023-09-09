@@ -12,7 +12,7 @@ var rootCmd = &cobra.Command{
 	Use:   "dragon-cli",
 	Short: "Generate full-stack projects based on user choices",
 	Run: func(cmd *cobra.Command, args []string) {
-		generate.Generate()
+		generate.Generate(cmd, args)
 	},
 }
 
@@ -28,6 +28,7 @@ func Execute() {
 			os.Exit(0)
 		}
 	}
+	rootCmd.Flags().String("branch", "master", "Specify the branch name (default is 'master')")
 
 	if err := rootCmd.Execute(); err != nil {
 
