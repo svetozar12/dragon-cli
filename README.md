@@ -19,11 +19,18 @@ Your CLI Tool Version vx.x.x
 To generate project run the following command and follow the steps
 
 ```
-dragon-cli
+dragon-cli --projectName=my-example-app --beFramework=nodejs --feFramework=Nextjs --installDeps=true
 ```
+
+Or
+`dragon-cli`
 
 ### I wish you happy coding !
 
 <!-- Docs -->
 
---branch
+--branch=`<the branch from which you want to get the templates default is master>`
+--projectName=`<the name of the project>`
+--beFramework=`"nodejs","golang","none"`
+--feFramework=`"React(with vite)","Nextjs","Astro","none"`
+--installDeps=`"true","false"`

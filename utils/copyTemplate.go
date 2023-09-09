@@ -4,18 +4,13 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"os/user"
 	"path"
 )
 
 func CopyTemplateFromRepo(templateToCopy string, destinationDir string, copyFolderContent bool) error {
-	usr, err := user.Current()
-	if err != nil {
-		fmt.Println("Error getting user's home directory:", err)
-		return err
-	}
+	tmpDir := os.TempDir()
 
-	templateDir := path.Join(usr.HomeDir, "dragon-cli-tmp/dragon-cli", templateToCopy)
+	templateDir := path.Join(tmpDir, "dragon-cli-tmp/dragon-cli", templateToCopy)
 	if copyFolderContent {
 		templateDir = templateDir + "/."
 	}
@@ -42,6 +37,14 @@ func CloneTemplateRepo(tmpRepoDir string, branch string) error {
 		fmt.Println("Error cloning repository:", err)
 		return err
 	}
+	dar := exec.Command("ls", tmpRepoDir)
+	dar.Stdout = os.Stdout
+	dar.Stderr = os.Stderr
+	if err := dar.Run(); err != nil {
+		fmt.Println("Error cloning repository:", err)
+		return err
+	}
+	fmt.Println(dar.String())
 	return nil
 }
 

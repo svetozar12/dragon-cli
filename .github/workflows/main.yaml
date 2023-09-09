@@ -27,7 +27,7 @@ jobs:
         run: go mod download
 
       - name: Build CLI tool
-        run: go build -o myclitool
+        run: go build -o dragon-cli
 
       - name: Run tests
         run: go test ./...
