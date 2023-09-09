@@ -57,7 +57,6 @@ func Generate(cmd *cobra.Command, args []string) {
 	if installDeps == "" {
 		installDeps = utils.GetBooleanInput("Do you want to install dependencies ?")
 	}
-	fmt.Println(projectName)
 	err = basehelper.CreateProjectDir(projectName)
 	if err != nil {
 		panic("Function CreateProjectDir() failed" + err.Error())
