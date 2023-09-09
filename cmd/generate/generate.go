@@ -1,8 +1,7 @@
 package generate
 
 import (
-	"fmt"
-	"os/user"
+	"os"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
@@ -16,12 +15,9 @@ import (
 func Generate(cmd *cobra.Command, args []string) {
 	// clone repo
 	branch, _ := cmd.Flags().GetString("branch")
-	usr, err := user.Current()
-	if err != nil {
-		fmt.Println("Error getting user's home directory:", err)
-		panic("Function RenameDefaultNames() failed" + err.Error())
-	}
-	tmpRepoDir := filepath.Join(usr.HomeDir, "dragon-cli-tmp")
+
+	tmpDir := os.TempDir()
+	tmpRepoDir := filepath.Join(tmpDir, "dragon-cli-tmp")
 
 	go func() {
 		err := utils.CloneTemplateRepo(tmpRepoDir, branch)
@@ -57,7 +53,7 @@ func Generate(cmd *cobra.Command, args []string) {
 	if installDeps == "" {
 		installDeps = utils.GetBooleanInput("Do you want to install dependencies ?")
 	}
-	err = basehelper.CreateProjectDir(projectName)
+	err := basehelper.CreateProjectDir(projectName)
 	if err != nil {
 		panic("Function CreateProjectDir() failed" + err.Error())
 	}
