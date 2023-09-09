@@ -14,13 +14,13 @@ import (
 )
 
 func Generate(cmd *cobra.Command, args []string) {
+	// clone repo
 	branch, _ := cmd.Flags().GetString("branch")
 	usr, err := user.Current()
 	if err != nil {
 		fmt.Println("Error getting user's home directory:", err)
 		panic("Function RenameDefaultNames() failed" + err.Error())
 	}
-
 	tmpRepoDir := filepath.Join(usr.HomeDir, "dragon-cli-tmp")
 
 	go func() {
@@ -32,16 +32,32 @@ func Generate(cmd *cobra.Command, args []string) {
 	defer func() {
 		utils.DeleteTemplateRepo(tmpRepoDir)
 	}()
-	projectName := utils.GetInput("Project Name")
-	beFramework := utils.GetCheckbox(
-		constants.BeFrameworkLabel,
-		constants.BeFrameworkList,
-	)
-	feFramework := utils.GetCheckbox(
-		constants.FeFrameworkLabel,
-		constants.FeFrameworkList,
-	)
-	installDeps := utils.GetBooleanInput("Do you want to install dependencies ?")
+
+	// flags
+	projectName, _ := cmd.Flags().GetString("projectName")
+	beFramework, _ := cmd.Flags().GetString("beFramework")
+	feFramework, _ := cmd.Flags().GetString("feFramework")
+	installDeps, _ := cmd.Flags().GetString("installDeps")
+
+	if projectName == "" {
+		projectName = utils.GetInput("Project Name")
+	}
+	if beFramework == "" {
+		beFramework = utils.GetCheckbox(
+			constants.BeFrameworkLabel,
+			constants.BeFrameworkList,
+		)
+	}
+	if feFramework == "" {
+		feFramework = utils.GetCheckbox(
+			constants.FeFrameworkLabel,
+			constants.FeFrameworkList,
+		)
+	}
+	if installDeps == "" {
+		installDeps = utils.GetBooleanInput("Do you want to install dependencies ?")
+	}
+	fmt.Println(projectName)
 	err = basehelper.CreateProjectDir(projectName)
 	if err != nil {
 		panic("Function CreateProjectDir() failed" + err.Error())
@@ -61,7 +77,7 @@ func Generate(cmd *cobra.Command, args []string) {
 	deps, devDeps := utils.GetDeps()
 	utils.AddDependency(deps, false, projectName)
 	utils.AddDependency(devDeps, true, projectName)
-	if installDeps {
+	if installDeps == "true" {
 		err := utils.InstallDependencies(projectName, "yarn")
 		if err != nil {
 			panic("Function InstallDependencies() failed" + err.Error())

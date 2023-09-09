@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
 	"github.com/svetozar12/dragon-cli/cmd/generate"
+	"github.com/svetozar12/dragon-cli/utils"
 )
 
 var rootCmd = &cobra.Command{
@@ -16,22 +16,11 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-var verbose bool
-var version = "v1.0.2"
+var Version = "v1.0.2"
 
 func Execute() {
-	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Enable verbose output")
-	rootCmd.PersistentFlags().BoolP("version", "V", false, "Print the version")
-	rootCmd.PersistentPreRun = func(cmd *cobra.Command, args []string) {
-		if cmd.Flags().Changed("version") {
-			fmt.Printf("Your CLI Tool Version %s\n", version)
-			os.Exit(0)
-		}
-	}
-	rootCmd.Flags().String("branch", "master", "Specify the branch name (default is 'master')")
-
+	utils.InitFlags(rootCmd)
 	if err := rootCmd.Execute(); err != nil {
-
 		os.Exit(1)
 	}
 }
