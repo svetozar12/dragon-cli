@@ -28,10 +28,3 @@ func RenameDefaultNames(projectName string) error {
 
 	return nil
 }
-
-func IsStringEmpty(value string) bool {
-	if len(value) > 0 {
-		return false
-	}
-	return true
-}
