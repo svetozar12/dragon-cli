@@ -1,0 +1,22 @@
+{
+  "name": "shared-sdk",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/sdk/src",
+  "projectType": "library",
+  "tags": [],
+  "implicitDependencies": ["api"],
+  "targets": {
+    "build": {
+      "dependsOn": ["build-openAPI"],
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx openapi-generator-cli generate -i http://127.0.0.1:3333/swagger.json -o libs/shared/sdk/src/api/v1 -g typescript-axios --additional-properties=supportsES6=true,typescriptThreePlus=true --skip-validate-spec"
+        ],
+        "parallel": false
+      },
+      "outputs": ["{projectRoot}/dist"],
+      "inputs": ["{projectRoot}/*.proto"]
+    }
+  }
+}
