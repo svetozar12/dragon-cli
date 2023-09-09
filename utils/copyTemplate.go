@@ -28,14 +28,14 @@ func CopyTemplateFromRepo(templateToCopy string, destinationDir string, copyFold
 	return nil
 }
 
-func CloneTemplateRepo(tmpRepoDir string) error {
+func CloneTemplateRepo(tmpRepoDir string, branch string) error {
 	repoURL := "https://github.com/svetozar12/dragon-cli"
 
 	if err := os.MkdirAll(tmpRepoDir, os.ModePerm); err != nil {
 		fmt.Println("Error creating temporary directory:", err)
 		return err
 	}
-	cmd := exec.Command("git", "clone", "--depth", "1", "--branch", "master", repoURL)
+	cmd := exec.Command("git", "clone", "--depth", "1", "--branch", branch, repoURL)
 	cmd.Dir = tmpRepoDir
 
 	if err := cmd.Run(); err != nil {
