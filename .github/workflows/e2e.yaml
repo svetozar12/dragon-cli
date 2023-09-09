@@ -1,0 +1,35 @@
+name: CLI Test
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  test-cli:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.20 # Set the Go version to 1.20 or your desired version
+
+      - name: Download Go module dependencies
+        run: go mod download
+
+      - name: Build CLI tool
+        run: go build -o myclitool
+
+      - name: Run tests
+        run: go test ./...
+
+      - name: Install CLI tool
+        run: sudo mv myclitool /usr/local/bin/myclitool
+        # This step installs your CLI tool globally for testing purposes
+
+      - name: Verify CLI tool
+        run: myclitool --projectName=my-example-app --beFramework=nodejs --feFramework=Nextjs --installDeps=true
