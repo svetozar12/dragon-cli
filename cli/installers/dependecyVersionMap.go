@@ -3,6 +3,7 @@ package installers
 var DependencyVersionMap = map[string]string{
 	// Nx
 	NX:                  "16.7.4",
+	NX_GO:               "^2.7.0",
 	"@nx/workspace":     "16.7.4",
 	"@nx/cypress":       "^16.7.4",
 	"@nx/esbuild":       "^16.7.4",
@@ -72,5 +73,6 @@ type AvailableDependencies string
 
 const (
 	NX             = "nx"
+	NX_GO          = "@nx-go/nx-go"
 	TYPES_MONGOOSE = "@types/mongoose"
 )
