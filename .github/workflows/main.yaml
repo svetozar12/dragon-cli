@@ -25,18 +25,18 @@ jobs:
 
       - name: Download Go module dependencies
         run: |
-          cd cli
+          cd cmd
           go mod download
         working-directory: ./ # Set the working directory to the root of your repository
 
       - name: Build CLI tool
         run: |
-          cd cli
+          cd cmd
           go build -o dragon-cli
         working-directory: ./ # Set the working directory to the root of your repository
 
       - name: Run tests
         run: |
-          cd cli
+          cd cmd
           go test -cover ./...
         working-directory: ./ # Set the working directory to the root of your repository
