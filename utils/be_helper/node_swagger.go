@@ -27,11 +27,6 @@ func initNodejsSwaggerProject(projectName string) error {
 		return err
 	}
 
-	// Define and set development dependencies.
-	if err := setNodejsSwaggerDevelopmentDependencies(); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -46,11 +41,6 @@ func setNodejsSwaggerProjectDependencies() error {
 		"mongoose",
 		"zod",
 	}
-	utils.SetDeps(packageNames)
-	return nil
-}
-
-func setNodejsSwaggerDevelopmentDependencies() error {
 	devPackageNames := []string{
 		"@nx/express",
 		"@nx/jest",
@@ -68,7 +58,7 @@ func setNodejsSwaggerDevelopmentDependencies() error {
 		"@types/mongoose",
 	}
 	devPackageNames = append(devPackageNames, constants.CommonDevFe...)
-	utils.SetDevDeps(devPackageNames)
+	utils.SetDeps(packageNames, devPackageNames)
 	return nil
 }
 

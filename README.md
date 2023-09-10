@@ -34,3 +34,5 @@ Or
 --beFramework=`"nodejs","golang","none"`
 --feFramework=`"React(with vite)","Nextjs","Astro","none"`
 --installDeps=`"true","false"`
+go test -v -coverprofile cover.out ./...
+go tool cover -html cover.out -o cover.html

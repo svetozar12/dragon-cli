@@ -17,11 +17,6 @@ func InitNextJSProject(projectName string) error {
 		return err
 	}
 
-	// Define and set development dependencies.
-	if err := setDevelopmentDependencies(); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -32,16 +27,11 @@ func setProjectDependencies() error {
 		"react-dom",
 		"tslib",
 	}
-	utils.SetDeps(packageNames)
-	return nil
-}
-
-func setDevelopmentDependencies() error {
 	devPackageNames := []string{
 		"@nx/next",
 		"eslint-config-next",
 	}
 	devPackageNames = append(devPackageNames, constants.CommonDevFe...)
-	utils.SetDevDeps(devPackageNames)
+	utils.SetDeps(packageNames, devPackageNames)
 	return nil
 }
