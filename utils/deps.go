@@ -11,14 +11,16 @@ import (
 var deps []string
 var devDeps []string
 
-func SetDeps(newDeps []string) {
-	deps = append(deps, newDeps...)
-	deps = removeDuplicates(deps)
-}
+func SetDeps(newDeps []string, newDevDeps []string) {
+	if len(newDeps) > 0 {
+		deps = append(deps, newDeps...)
+		deps = removeDuplicates(deps)
 
-func SetDevDeps(newDevDeps []string) {
-	devDeps = append(devDeps, newDevDeps...)
-	devDeps = removeDuplicates(devDeps)
+	}
+	if len(newDevDeps) > 0 {
+		devDeps = append(devDeps, newDevDeps...)
+		devDeps = removeDuplicates(devDeps)
+	}
 }
 
 func GetDeps() ([]string, []string) {

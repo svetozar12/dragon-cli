@@ -12,8 +12,7 @@ func TestGetDeps(t *testing.T) {
 	t.Run("TestGetDeps correct behavior", func(t *testing.T) {
 
 		newDeps := "new deps"
-		SetDeps([]string{newDeps})
-		SetDevDeps([]string{newDeps})
+		SetDeps([]string{newDeps}, []string{newDeps})
 		deps, devDeps := GetDeps()
 		if deps[len(deps)-1] != newDeps && devDeps[len(devDeps)-1] != newDeps {
 			t.Fatalf("GetDeps() doesn't get correct dependencies")
@@ -39,33 +38,16 @@ func TestRemoveDuplicates(t *testing.T) {
 func TestSetDeps(t *testing.T) {
 	t.Run("TestSetDeps correct behavior", func(t *testing.T) {
 		newDeps := "new deps"
-		SetDeps([]string{newDeps})
-		if deps[0] != newDeps {
+		SetDeps([]string{newDeps}, []string{newDeps})
+		if deps[0] != newDeps || devDeps[0] != newDeps {
 			t.Fatalf("SetDeps() should set new dependency in array")
 		}
 	})
 	t.Run("TestSetDeps shouldn't have two deps with same name", func(t *testing.T) {
 		newDeps := "new deps"
-		SetDeps([]string{newDeps, newDeps})
-		if len(deps) > 1 {
+		SetDeps([]string{newDeps, newDeps}, []string{newDeps, newDeps})
+		if len(deps) > 1 || len(devDeps) > 1 {
 			t.Fatalf("SetDeps() shouldn't have two deps with same name")
-		}
-	})
-}
-
-func TestSetDevDeps(t *testing.T) {
-	t.Run("TestSetDevDeps correct behavior", func(t *testing.T) {
-		newDeps := "new deps"
-		SetDevDeps([]string{newDeps})
-		if deps[0] != newDeps {
-			t.Fatalf("SetDevDeps() should set new dependency in array")
-		}
-	})
-	t.Run("TestSetDevDeps shouldn't have two deps with same name", func(t *testing.T) {
-		newDeps := "new deps"
-		SetDevDeps([]string{newDeps, newDeps})
-		if len(deps) > 1 {
-			t.Fatalf("SetDevDeps() shouldn't have two deps with same name")
 		}
 	})
 }

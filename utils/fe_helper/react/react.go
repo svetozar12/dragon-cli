@@ -21,12 +21,6 @@ func InitReactProject(projectName string) error {
 	if err := setReactProjectDependencies(); err != nil {
 		return err
 	}
-
-	// Define and set development dependencies.
-	if err := setReactDevelopmentDependencies(); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -61,13 +55,8 @@ func setReactProjectDependencies() error {
 		"react-router-dom",
 		"tslib",
 	}
-	utils.SetDeps(packageNames)
-	return nil
-}
-
-func setReactDevelopmentDependencies() error {
 	devPackageNames := []string{}
 	devPackageNames = append(devPackageNames, constants.CommonDevFe...)
-	utils.SetDevDeps(devPackageNames)
+	utils.SetDeps(packageNames, devPackageNames)
 	return nil
 }

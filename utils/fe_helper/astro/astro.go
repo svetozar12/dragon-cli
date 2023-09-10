@@ -23,6 +23,6 @@ func setProjectDependencies() error {
 	packageNames := []string{
 		"astro",
 	}
-	utils.SetDeps(packageNames)
+	utils.SetDeps(packageNames, []string{})
 	return nil
 }
