@@ -1,11 +1,11 @@
 package config
 
 import (
-	"svetozar12/headless-cms-be/db"
-	"svetozar12/headless-cms-be/routes/content"
-	contentmodel "svetozar12/headless-cms-be/routes/contentModel"
-	"svetozar12/headless-cms-be/routes/field"
-	fieldtype "svetozar12/headless-cms-be/routes/fieldType"
+	"@dragon-cli-template/db"
+	"@dragon-cli-template/routes/content"
+	contentmodel "@dragon-cli-template/routes/contentModel"
+	"@dragon-cli-template/routes/field"
+	fieldtype "@dragon-cli-template/routes/fieldType"
 )
 
 func Init() {

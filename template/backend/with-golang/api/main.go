@@ -1,8 +1,8 @@
 package main
 
 import (
-	"svetozar12/headless-cms-be/db"
-	"svetozar12/headless-cms-be/routes"
+	"@dragon-cli-template/db"
+	"@dragon-cli-template/routes"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"

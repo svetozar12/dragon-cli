@@ -1,9 +1,9 @@
 package content
 
 import (
+	"@dragon-cli-template/db"
+	"@dragon-cli-template/models"
 	"strconv"
-	"svetozar12/headless-cms-be/db"
-	"svetozar12/headless-cms-be/models"
 
 	"github.com/gofiber/fiber/v2"
 )

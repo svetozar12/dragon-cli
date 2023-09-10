@@ -43,7 +43,7 @@ func removeDuplicates(input []string) []string {
 
 func InstallDependencies(projectName string, packageManager string) error {
 	// Check if the go.mod file exists in the project directory
-	if _, err := os.Stat(projectName + "/go.mod"); err == nil {
+	if _, err := os.Stat(projectName + "/go.sum"); err == nil {
 		fmt.Printf("Installing golang deps...")
 		// go.mod file exists, run go mod download
 		cmd := exec.Command("go", "mod", "init", projectName)
@@ -66,15 +66,13 @@ func InstallDependencies(projectName string, packageManager string) error {
 			fmt.Printf("Error running 'go mod download': %v\n", err)
 			return err
 		}
-
-		// go.mod file does not exist, continue with packageManager install
-		cmdPackageManager := exec.Command(packageManager, "install")
-		cmdPackageManager.Dir = projectName
-		cmdPackageManager.Stdout = os.Stdout
-		cmdPackageManager.Stderr = os.Stderr
-		if err := cmdPackageManager.Run(); err != nil {
-			return fmt.Errorf("error installing dependencies: %v", err)
-		}
+	}
+	cmdPackageManager := exec.Command(packageManager, "install")
+	cmdPackageManager.Dir = projectName
+	cmdPackageManager.Stdout = os.Stdout
+	cmdPackageManager.Stderr = os.Stderr
+	if err := cmdPackageManager.Run(); err != nil {
+		return fmt.Errorf("error installing dependencies: %v", err)
 	}
 
 	return nil

@@ -1,13 +1,13 @@
 package routes
 
 import (
-	"svetozar12/headless-cms-be/config"
-	content "svetozar12/headless-cms-be/routes/content"
-	contentmodel "svetozar12/headless-cms-be/routes/contentModel"
-	"svetozar12/headless-cms-be/routes/field"
-	fieldtype "svetozar12/headless-cms-be/routes/fieldType"
+	"@dragon-cli-template/config"
+	content "@dragon-cli-template/routes/content"
+	contentmodel "@dragon-cli-template/routes/contentModel"
+	"@dragon-cli-template/routes/field"
+	fieldtype "@dragon-cli-template/routes/fieldType"
 
-	_ "svetozar12/headless-cms-be/docs"
+	_ "@dragon-cli-template/docs"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/swagger"
