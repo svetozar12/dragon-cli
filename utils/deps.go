@@ -51,15 +51,15 @@ func InstallDependencies(projectName string, packageManager string) error {
 	return nil
 }
 
-func AddDependency(packageList []string, isDev bool, projectName string) {
+func AddDependency(packageList []string, isDev bool, projectName string) error {
 	if len(packageList) < 1 {
-		return
+		return nil
 	}
 	filePath := projectName + "/package.json"
 
 	data, file, err := DecodeJson(filePath)
 	if err != nil {
-		panic("Function DecodeJson() failed" + err.Error())
+		return fmt.Errorf("Function DecodeJson() failed: %v", err)
 	}
 	defer file.Close()
 
@@ -76,4 +76,5 @@ func AddDependency(packageList []string, isDev bool, projectName string) {
 
 	}
 	SaveJsonFile(file, data)
+	return nil
 }

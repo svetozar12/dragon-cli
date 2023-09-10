@@ -70,8 +70,11 @@ func Generate(cmd *cobra.Command, args []string) {
 		panic("Function RenameDefaultNames() failed" + err.Error())
 	}
 	deps, devDeps := utils.GetDeps()
-	utils.AddDependency(deps, false, projectName)
-	utils.AddDependency(devDeps, true, projectName)
+	err = utils.AddDependency(deps, false, projectName)
+	err = utils.AddDependency(devDeps, true, projectName)
+	if err != nil {
+		panic(err)
+	}
 	if installDeps == "true" {
 		err := utils.InstallDependencies(projectName, "yarn")
 		if err != nil {

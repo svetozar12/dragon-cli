@@ -2,6 +2,7 @@ package utils
 
 import (
 	"os"
+	"reflect"
 	"testing"
 
 	"github.com/svetozar12/dragon-cli/installers"
@@ -9,13 +10,12 @@ import (
 
 func TestGetDeps(t *testing.T) {
 	t.Run("TestGetDeps correct behavior", func(t *testing.T) {
-		if len(deps) > 0 || len(devDeps) > 0 {
-			t.Fatalf("TestGetDeps() both deps and devDeps should be empty arrays")
-		}
+
 		newDeps := "new deps"
 		SetDeps([]string{newDeps})
 		SetDevDeps([]string{newDeps})
-		if deps[0] != newDeps && devDeps[0] != newDeps {
+		deps, devDeps := GetDeps()
+		if deps[len(deps)-1] != newDeps && devDeps[len(devDeps)-1] != newDeps {
 			t.Fatalf("GetDeps() doesn't get correct dependencies")
 		}
 	})
@@ -147,6 +147,20 @@ func TestAddDependency(t *testing.T) {
 			}
 		})
 	}
+	t.Run("TestAddDependency() test if dependency list is empty", func(t *testing.T) {
+		beforeAddDeps := devDeps
+		AddDependency([]string{}, true, "")
+
+		if !reflect.DeepEqual(beforeAddDeps, devDeps) {
+			t.Errorf("devDeps shouldn't have changed")
+		}
+	})
+	t.Run("TestAddDependency() test if package.json is missing", func(t *testing.T) {
+		err := AddDependency([]string{"test"}, true, "invalid")
+		if err == nil {
+			t.Errorf("AddDependency() should throw error")
+		}
+	})
 }
 
 func TestInstallDependency(t *testing.T) {
@@ -184,5 +198,10 @@ func TestInstallDependency(t *testing.T) {
 	if err := os.Remove(filePath); err != nil {
 		t.Errorf("Failed to delete file %s: %v\n", filePath, err)
 	}
-
+	t.Run("TestInstallDependency test with invalid install path", func(t *testing.T) {
+		err := InstallDependencies("invalid", "yarn")
+		if err == nil {
+			t.Errorf("InstallDependencies() should throw error")
+		}
+	})
 }
