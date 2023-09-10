@@ -14,12 +14,12 @@ func TestDecodeJson(t *testing.T) {
 
 		err := os.WriteFile(jsonFilePath, []byte(sampleJSON), 0644)
 		if err != nil {
-			t.Fatalf("Failed to create a sample package.json file: %v", err)
+			t.Errorf("%v", err)
 		}
 
 		defer func() {
 			if err := os.Remove(jsonFilePath); err != nil {
-				t.Errorf("Failed to delete temporary JSON file: %v", err)
+				t.Errorf("%v", err)
 			}
 		}()
 
@@ -27,7 +27,7 @@ func TestDecodeJson(t *testing.T) {
 		defer file.Close()
 
 		if json["name"] != "dragon-cli-template" || err != nil {
-			t.Errorf("DecodeJson() doesn't work correctly: %v", err)
+			t.Errorf("%v", err)
 		}
 	})
 	t.Run("DecodeJson() - test decoding error", func(t *testing.T) {
@@ -36,19 +36,19 @@ func TestDecodeJson(t *testing.T) {
 
 		err := os.WriteFile(jsonFilePath, []byte("invalid json"), 0644)
 		if err != nil {
-			t.Fatalf("Failed to create a sample package.json file: %v", err)
+			t.Errorf("%v", err)
 		}
 
 		defer func() {
 			if err := os.Remove(jsonFilePath); err != nil {
-				t.Errorf("Failed to delete temporary JSON file: %v", err)
+				t.Errorf("%v", err)
 			}
 		}()
 
 		_, file, err := DecodeJson(jsonFilePath)
 		defer file.Close()
 		if err == nil {
-			t.Errorf("DecodeJson() should throw a error")
+			t.Errorf("Expected an error, but got nil")
 		}
 	})
 }
@@ -60,12 +60,12 @@ func TestSaveJsonFile(t *testing.T) {
 
 		err := os.WriteFile(jsonFilePath, []byte(sampleJSON), 0644)
 		if err != nil {
-			t.Fatalf("Failed to create a sample package.json file: %v", err)
+			t.Errorf("%v", err)
 		}
 
 		defer func() {
 			if err := os.Remove(jsonFilePath); err != nil {
-				t.Errorf("Failed to delete temporary JSON file: %v", err)
+				t.Errorf("%v", err)
 			}
 		}()
 
@@ -78,7 +78,7 @@ func TestSaveJsonFile(t *testing.T) {
 			t.Errorf("SaveJsonFile() doesn't work correctly: %v", err)
 		}
 	})
-	t.Run("SaveJsonFile() - correct behavior", func(t *testing.T) {
+	t.Run("SaveJsonFile() - test errors", func(t *testing.T) {
 		// Create a temporary file for testing
 		tempFile, err := ioutil.TempFile("", "testfile.json")
 		if err != nil {
@@ -108,8 +108,6 @@ func TestSaveJsonFile(t *testing.T) {
 		err = SaveJsonFile(tempFile, data)
 		if err == nil {
 			t.Errorf("Expected an error, but got nil")
-		} else {
-			t.Logf("Error: %v", err)
 		}
 
 	})
