@@ -6,73 +6,47 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/svetozar12/dragon-cli/constants"
 	"github.com/svetozar12/dragon-cli/utils"
 )
 
-func initNodejsSwaggerProject(projectName string) error {
-	cmd := exec.Command("cp", "-a", "template/backend/with-nodejs/.", projectName+"/apps")
+func initGolangSwaggerProject(projectName string) error {
+	cmd := exec.Command("cp", "-a", "template/backend/with-golang/.", projectName+"/apps")
 	err := cmd.Run()
 	if err != nil {
 		return fmt.Errorf("error creating project directory: %v", err)
 	}
 
 	// Initialize the Node.js Swagger library.
-	if err := initNodejsSwaggerLib(projectName); err != nil {
+	if err := initGolangSwaggerLib(projectName); err != nil {
 		return err
 	}
 
 	// Define and set project dependencies.
-	if err := setNodejsSwaggerProjectDependencies(); err != nil {
+	if err := setGolangSwaggerProjectDependencies(projectName); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func setNodejsSwaggerProjectDependencies() error {
-	packageNames := []string{
-		"axios",
-		"express",
-		"swagger-jsdoc",
-		"swagger-ui-express",
-		"tslib",
-		"@openapitools/openapi-generator-cli",
-		"mongoose",
-		"zod",
-	}
-	devPackageNames := []string{
-		"@nx/express",
-		"@nx/jest",
-		"@nx/node",
-		"@nx/webpack",
-		"@types/express",
-		"@types/jest",
-		"@types/node",
-		"jest",
-		"jest-environment-node",
-		"ts-jest",
-		"ts-node",
-		"@types/swagger-ui-express",
-		"@types/swagger-jsdoc",
-		"@types/mongoose",
-	}
-	devPackageNames = append(devPackageNames, constants.CommonDevFe...)
-	utils.SetDeps(packageNames, devPackageNames)
+func setGolangSwaggerProjectDependencies(projectName string) error {
+
+	cmd := exec.Command("cp", "-a", "template/go.mod", projectName+"/go.mod")
+	cmd.Run()
 	return nil
 }
 
-func initNodejsSwaggerLib(projectName string) error {
+func initGolangSwaggerLib(projectName string) error {
 	copyFolderContent := true
-	err := utils.CopyTemplateFromRepo("template/libs/with-nodejs", projectName+"/libs", copyFolderContent)
+	err := utils.CopyTemplateFromRepo("template/libs/with-golang", projectName+"/libs", copyFolderContent)
 	if err != nil {
 		return err
 	}
-	modifyNodejsTsconfig(projectName)
+	modifyGolangTsconfig(projectName)
 	return nil
 }
 
-func modifyNodejsTsconfig(projectName string) {
+func modifyGolangTsconfig(projectName string) {
 	// Open the JSON file for reading and writing
 	filePath := projectName + "/tsconfig.base.json"
 	file, err := os.OpenFile(filePath, os.O_RDWR, 0644)

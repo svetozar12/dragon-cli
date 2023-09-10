@@ -37,14 +37,7 @@ func CloneTemplateRepo(tmpRepoDir string, branch string) error {
 		fmt.Println("Error cloning repository:", err)
 		return err
 	}
-	dar := exec.Command("ls", tmpRepoDir)
-	dar.Stdout = os.Stdout
-	dar.Stderr = os.Stderr
-	if err := dar.Run(); err != nil {
-		fmt.Println("Error cloning repository:", err)
-		return err
-	}
-	fmt.Println(dar.String())
+
 	return nil
 }
 
