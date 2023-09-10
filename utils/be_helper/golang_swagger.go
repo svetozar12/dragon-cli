@@ -31,7 +31,7 @@ func initGolangSwaggerProject(projectName string) error {
 
 func setGolangSwaggerProjectDependencies(projectName string) error {
 
-	cmd := exec.Command("cp", "-a", "template/go.mod", projectName+"/go.mod")
+	cmd := exec.Command("cp", "-a", "template/go.sum", projectName+"/go.mod")
 	cmd.Run()
 	return nil
 }
