@@ -27,12 +27,16 @@ Or
 
 ### I wish you happy coding !
 
-<!-- Docs -->
+## DOCS
 
---branch=`<the branch from which you want to get the templates default is master>`
---projectName=`<the name of the project>`
---beFramework=`"nodejs","golang","none"`
---feFramework=`"React(with vite)","Nextjs","Astro","none"`
---installDeps=`"true","false"`
-go test -v -coverprofile cover.out ./...
-go tool cover -html cover.out -o cover.html
+- --branch=`<the branch from which you want to get the templates default is master>`
+- --projectName=`<the name of the project>`
+- --beFramework=`"nodejs","golang","none"`
+- --feFramework=`"React(with vite)","Nextjs","Astro","none"`
+- --installDeps=`"true","false"`
+- go test -v -coverprofile cover.out ./...
+- go tool cover -html cover.out -o cover.html
+
+## Templates
+
+Used to store template for dragon-cli: https://github.com/svetozar12/dragon-cli-templates
