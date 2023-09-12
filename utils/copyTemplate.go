@@ -9,7 +9,6 @@ import (
 
 func CopyTemplateFromRepo(templateToCopy string, destinationDir string, copyFolderContent bool) error {
 	tmpDir := os.TempDir()
-
 	templateDir := path.Join(tmpDir, "dragon-cli-tmp/dragon-cli-templates", templateToCopy)
 	if copyFolderContent {
 		templateDir = templateDir + "/."

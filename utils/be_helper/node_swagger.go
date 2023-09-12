@@ -4,15 +4,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"os/exec"
 
 	"github.com/svetozar12/dragon-cli/constants"
 	"github.com/svetozar12/dragon-cli/utils"
 )
 
 func initNodejsSwaggerProject(projectName string) error {
-	cmd := exec.Command("cp", "-a", "template/backend/with-nodejs/.", projectName+"/apps")
-	err := cmd.Run()
+	copyFolderContent := true
+	err := utils.CopyTemplateFromRepo("backend/with-golang", projectName+"/apps", copyFolderContent)
 	if err != nil {
 		return fmt.Errorf("error creating project directory: %v", err)
 	}

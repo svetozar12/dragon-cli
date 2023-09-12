@@ -18,7 +18,7 @@ func InitFlags(rootCmd *cobra.Command) {
 			os.Exit(0)
 		}
 	}
-	rootCmd.Flags().String("branch", "master", "Specify the branch name (default is 'master')")
+	rootCmd.Flags().String("branch", "main", "Specify the branch name (default is 'main')")
 
 	// projectName
 	rootCmd.Flags().String("projectName", "", "Specify the project name")

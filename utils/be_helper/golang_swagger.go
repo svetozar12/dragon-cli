@@ -4,14 +4,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"os/exec"
 
+	"github.com/svetozar12/dragon-cli/installers"
 	"github.com/svetozar12/dragon-cli/utils"
 )
 
 func initGolangSwaggerProject(projectName string) error {
-	cmd := exec.Command("cp", "-a", "template/backend/with-golang/.", projectName+"/apps")
-	err := cmd.Run()
+	copyFolderContent := true
+	err := utils.CopyTemplateFromRepo("backend/with-golang", projectName+"/apps", copyFolderContent)
 	if err != nil {
 		return fmt.Errorf("error creating project directory: %v", err)
 	}
@@ -30,9 +30,11 @@ func initGolangSwaggerProject(projectName string) error {
 }
 
 func setGolangSwaggerProjectDependencies(projectName string) error {
-
-	cmd := exec.Command("cp", "-a", "template/go.sum", projectName+"/go.sum")
-	cmd.Run()
+	err := utils.CopyTemplateFromRepo("/go.sum", projectName+"/go.sum", false)
+	if err != nil {
+		return fmt.Errorf("error creating project directory: %v", err)
+	}
+	utils.AddDependency([]string{installers.NX_GO}, false, projectName)
 	return nil
 }
 
