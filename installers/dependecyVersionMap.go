@@ -18,14 +18,14 @@ var DependencyVersionMap = map[string]string{
 	// Axios
 	"axios": "^1.5.0",
 	// Swagger
-	"swagger-jsdoc":                       "^6.2.8",
-	"swagger-ui-express":                  "^5.0.0",
-	"@openapitools/openapi-generator-cli": "^2.7.0",
+	"swagger-jsdoc":        "^6.2.8",
+	"swagger-ui-express":   "^5.0.0",
+	OPEN_API_GENERATOR_CLI: "^2.7.0",
 	// Typescript
 	"tslib":                            "^2.6.2",
 	"@types/express":                   "^4.17.17",
 	"@types/jest":                      "^29.5.4",
-	"@types/node":                      "^20.5.9",
+	TYPES_NODE:                         "^20.5.9",
 	"@types/react":                     "^18.2.21",
 	"@types/react-dom":                 "^18.2.7",
 	"@types/swagger-jsdoc":             "^6.0.1",
@@ -72,7 +72,9 @@ var DependencyVersionMap = map[string]string{
 type AvailableDependencies string
 
 const (
-	NX             = "nx"
-	NX_GO          = "@nx-go/nx-go"
-	TYPES_MONGOOSE = "@types/mongoose"
+	OPEN_API_GENERATOR_CLI = "@openapitools/openapi-generator-cli"
+	NX                     = "nx"
+	NX_GO                  = "@nx-go/nx-go"
+	TYPES_MONGOOSE         = "@types/mongoose"
+	TYPES_NODE             = "@types/node"
 )

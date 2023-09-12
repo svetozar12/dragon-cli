@@ -34,7 +34,7 @@ func setGolangSwaggerProjectDependencies(projectName string) error {
 	if err != nil {
 		return fmt.Errorf("error creating project directory: %v", err)
 	}
-	utils.AddDependency([]string{installers.NX_GO}, false, projectName)
+	utils.SetDeps([]string{installers.NX_GO, installers.OPEN_API_GENERATOR_CLI}, []string{installers.TYPES_NODE})
 	return nil
 }
 

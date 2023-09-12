@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/svetozar12/dragon-cli/constants"
+	"github.com/svetozar12/dragon-cli/installers"
 	"github.com/svetozar12/dragon-cli/utils"
 )
 
@@ -36,7 +37,7 @@ func setNodejsSwaggerProjectDependencies() error {
 		"swagger-jsdoc",
 		"swagger-ui-express",
 		"tslib",
-		"@openapitools/openapi-generator-cli",
+		installers.OPEN_API_GENERATOR_CLI,
 		"mongoose",
 		"zod",
 	}
@@ -47,14 +48,14 @@ func setNodejsSwaggerProjectDependencies() error {
 		"@nx/webpack",
 		"@types/express",
 		"@types/jest",
-		"@types/node",
+		installers.TYPES_NODE,
 		"jest",
 		"jest-environment-node",
 		"ts-jest",
 		"ts-node",
 		"@types/swagger-ui-express",
 		"@types/swagger-jsdoc",
-		"@types/mongoose",
+		installers.TYPES_MONGOOSE,
 	}
 	devPackageNames = append(devPackageNames, constants.CommonDevFe...)
 	utils.SetDeps(packageNames, devPackageNames)
