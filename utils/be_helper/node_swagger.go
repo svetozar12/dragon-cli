@@ -12,7 +12,7 @@ import (
 
 func initNodejsSwaggerProject(projectName string) error {
 	copyFolderContent := true
-	err := utils.CopyTemplateFromRepo("backend/with-golang", projectName+"/apps", copyFolderContent)
+	err := utils.CopyTemplateFromRepo("backend/with-nodejs", projectName+"/apps", copyFolderContent)
 	if err != nil {
 		return fmt.Errorf("error creating project directory: %v", err)
 	}
@@ -64,7 +64,7 @@ func setNodejsSwaggerProjectDependencies() error {
 
 func initNodejsSwaggerLib(projectName string) error {
 	copyFolderContent := true
-	err := utils.CopyTemplateFromRepo("libs/with-nodejs", projectName+"/libs", copyFolderContent)
+	err := utils.CopyTemplateFromRepo("libs", projectName+"/libs", copyFolderContent)
 	if err != nil {
 		return err
 	}

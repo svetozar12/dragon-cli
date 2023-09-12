@@ -40,7 +40,7 @@ func setGolangSwaggerProjectDependencies(projectName string) error {
 
 func initGolangSwaggerLib(projectName string) error {
 	copyFolderContent := true
-	err := utils.CopyTemplateFromRepo("libs/with-golang", projectName+"/libs", copyFolderContent)
+	err := utils.CopyTemplateFromRepo("libs", projectName+"/libs", copyFolderContent)
 	if err != nil {
 		return err
 	}
