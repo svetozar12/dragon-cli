@@ -28,3 +28,15 @@ func RenameDefaultNames(projectName string) error {
 
 	return nil
 }
+
+func InitGit(projectName string) error {
+	cmd := exec.Command("git", "init")
+	cmd.Dir = projectName
+	// Run the command
+	err := cmd.Run()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

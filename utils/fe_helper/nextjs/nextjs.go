@@ -2,6 +2,7 @@ package nextjs
 
 import (
 	"github.com/svetozar12/dragon-cli/constants"
+	"github.com/svetozar12/dragon-cli/installers"
 	"github.com/svetozar12/dragon-cli/utils"
 )
 
@@ -22,14 +23,13 @@ func InitNextJSProject(projectName string) error {
 
 func setProjectDependencies() error {
 	packageNames := []string{
-		"next",
-		"react",
-		"react-dom",
-		"tslib",
+		installers.NEXT,
+		installers.REACT,
+		installers.REACT_DOM,
+		installers.TSLIB,
 	}
 	devPackageNames := []string{
-		"@nx/next",
-		"eslint-config-next",
+		installers.NX_NEXT,
 	}
 	devPackageNames = append(devPackageNames, constants.CommonDevFe...)
 	utils.SetDeps(packageNames, devPackageNames)

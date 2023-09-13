@@ -11,7 +11,7 @@ import (
 func TestGetDeps(t *testing.T) {
 	t.Run("GetDeps() - test correct behavior", func(t *testing.T) {
 
-		newDeps := "new deps"
+		newDeps := installers.AXIOS
 		SetDeps([]string{newDeps}, []string{newDeps})
 		deps, devDeps := GetDeps()
 		if deps[len(deps)-1] != newDeps && devDeps[len(devDeps)-1] != newDeps {
@@ -37,14 +37,14 @@ func TestRemoveDuplicates(t *testing.T) {
 
 func TestSetDeps(t *testing.T) {
 	t.Run("SetDeps() - correct behavior", func(t *testing.T) {
-		newDeps := "new deps"
+		newDeps := installers.AXIOS
 		SetDeps([]string{newDeps}, []string{newDeps})
 		if deps[0] != newDeps || devDeps[0] != newDeps {
 			t.Fatalf("SetDeps() should set new dependency in array")
 		}
 	})
 	t.Run("SetDeps() test two deps with same name", func(t *testing.T) {
-		newDeps := "new deps"
+		newDeps := installers.AXIOS
 		SetDeps([]string{newDeps, newDeps}, []string{newDeps, newDeps})
 		if len(deps) > 1 || len(devDeps) > 1 {
 			t.Fatalf("SetDeps() shouldn't have two deps with same name")

@@ -34,6 +34,7 @@ func Generate(cmd *cobra.Command, args []string) {
 	beFramework, _ := cmd.Flags().GetString("beFramework")
 	feFramework, _ := cmd.Flags().GetString("feFramework")
 	installDeps, _ := cmd.Flags().GetString("installDeps")
+	initGit, _ := cmd.Flags().GetString("initGit")
 
 	if projectName == "" {
 		projectName = utils.GetInput("Project Name")
@@ -53,9 +54,16 @@ func Generate(cmd *cobra.Command, args []string) {
 	if installDeps == "" {
 		installDeps = utils.GetBooleanInput("Do you want to install dependencies ?")
 	}
+	if initGit == "" {
+		initGit = utils.GetBooleanInput("Do you want to initialize git repository ?")
+	}
 	err := basehelper.CreateProjectDir(projectName)
 	if err != nil {
 		panic("Function CreateProjectDir() failed" + err.Error())
+	}
+	err = basehelper.InitGit(projectName)
+	if err != nil {
+		panic("Function InitGit() failed" + err.Error())
 	}
 	err = behelper.InitBeProject(projectName, beFramework)
 	if err != nil {

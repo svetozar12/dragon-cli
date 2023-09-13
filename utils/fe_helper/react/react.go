@@ -6,6 +6,7 @@ import (
 	"os/exec"
 
 	"github.com/svetozar12/dragon-cli/constants"
+	"github.com/svetozar12/dragon-cli/installers"
 	"github.com/svetozar12/dragon-cli/utils"
 )
 
@@ -48,12 +49,12 @@ func copyTemplateFiles(projectName, relativeSourcePath string) error {
 
 func setReactProjectDependencies() error {
 	packageNames := []string{
-		"@swc/helpers",
-		"axios",
-		"react",
-		"react-dom",
-		"react-router-dom",
-		"tslib",
+		installers.SWC_HELPERS,
+		installers.AXIOS,
+		installers.REACT,
+		installers.REACT_DOM,
+		installers.REACT_ROUTER_DOM,
+		installers.TSLIB,
 	}
 	devPackageNames := []string{}
 	devPackageNames = append(devPackageNames, constants.CommonDevFe...)

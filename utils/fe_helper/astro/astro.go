@@ -1,6 +1,7 @@
 package astro
 
 import (
+	"github.com/svetozar12/dragon-cli/installers"
 	"github.com/svetozar12/dragon-cli/utils"
 )
 
@@ -21,7 +22,7 @@ func InitAstroProject(projectName string) error {
 
 func setProjectDependencies() error {
 	packageNames := []string{
-		"astro",
+		installers.ASTRO,
 	}
 	utils.SetDeps(packageNames, []string{})
 	return nil
