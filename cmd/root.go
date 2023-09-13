@@ -16,7 +16,7 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-var Version = "v2.2.0"
+var Version = "v2.2.1"
 
 func Execute() {
 	utils.InitFlags(rootCmd)
