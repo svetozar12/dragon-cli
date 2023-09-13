@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"os/exec"
 
+	"github.com/svetozar12/dragon-cli/installers"
 	"github.com/svetozar12/dragon-cli/utils"
 )
 
 func CreateProjectDir(projectName string) error {
 	copyFolderContent := false
+	utils.SetDeps([]string{installers.TYPESCRIPT}, []string{})
 	err := utils.CopyTemplateFromRepo("base", projectName, copyFolderContent)
 	if err != nil {
 		return fmt.Errorf("error creating project directory: %v", err)

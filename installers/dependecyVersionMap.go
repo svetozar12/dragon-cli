@@ -1,6 +1,7 @@
 package installers
 
 var DependencyVersionMap = map[string]string{
+	EXPRESS: "^4.18.2",
 	// Nx
 	NX:               "16.7.4",
 	NX_GO:            "^2.7.0",
@@ -108,7 +109,7 @@ const (
 	TYPES_REACT      = "@types/react"
 	TYPES_REACT_DOM  = "@types/react-dom"
 	NEXT             = "next"
-
+	EXPRESS          = "express"
 	// NX
 	NX               = "nx"
 	NX_GO            = "@nx-go/nx-go"

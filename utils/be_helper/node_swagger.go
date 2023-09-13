@@ -38,7 +38,7 @@ func setNodejsSwaggerProjectDependencies() error {
 		installers.TSLIB,
 		installers.OPEN_API_GENERATOR_CLI,
 		installers.MONGOOSE,
-		installers.ZOD,
+		installers.ZOD, installers.NX_EXPRESS,
 	}
 	devPackageNames := []string{
 		installers.NX_EXPRESS,
